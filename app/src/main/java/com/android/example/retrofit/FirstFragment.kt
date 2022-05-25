@@ -1,5 +1,6 @@
 package com.android.example.retrofit
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -27,7 +28,7 @@ class FirstFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
@@ -48,15 +49,16 @@ class FirstFragment : Fragment() {
     }
 
     //Function for increase value whit coroutine
+    @SuppressLint("SetTextI18n")
     private fun increaseValue(){
         viewLifecycleOwner.lifecycleScope.launch {
         delay(2000)
             number?.let{
                 number = number?.plus(1)
-                binding.textviewFirst.text = "value is $it"
+                binding.textFirst.text = "value is $it"
             } ?: kotlin.run {
                 number = binding.editText.text.toString().toIntOrNull()?.plus(1)
-                binding.textviewFirst.text = "Il valore è: $number"
+                binding.textFirst.text = "Il valore è: $number"
             }
     }}
 
